@@ -8,32 +8,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.LocalStrategy = void 0;
+const passport_local_1 = require("passport-local");
+const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const typeorm_2 = require("typeorm");
-const user_entity_1 = require("./user.entity");
-let UserService = class UserService {
-    constructor(userRepository) {
-        this.userRepository = userRepository;
-    }
-    async findOne(user) {
-        return this.userRepository.findOne({
-            where: {
-                login: user.login,
-                password: user.password,
-            },
+const auth_service_1 = require("./auth.service");
+let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)(passport_local_1.Strategy) {
+    constructor(authService) {
+        super({
+            usernameField: 'login',
+            passwordField: 'password',
         });
+        this.authService = authService;
+    }
+    async validate(login, password) {
+        const user = await this.authService.validateUser({ login, password });
+        if (!user) {
+            throw new common_1.UnauthorizedException();
+        }
+        return user;
     }
 };
-UserService = __decorate([
+LocalStrategy = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.UserEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=user.service.js.map
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
+], LocalStrategy);
+exports.LocalStrategy = LocalStrategy;
+//# sourceMappingURL=local.strategy.js.map

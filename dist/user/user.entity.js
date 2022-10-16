@@ -9,17 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-const common_1 = require("@nestjs/common");
-const user_service_1 = require("./user.service");
-let UserController = class UserController {
-    constructor(userService) {
-        this.userService = userService;
-    }
+exports.UserEntity = void 0;
+const typeorm_1 = require("typeorm");
+let UserEntity = class UserEntity {
 };
-UserController = __decorate([
-    (0, common_1.Controller)('user'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
-], UserController);
-exports.UserController = UserController;
-//# sourceMappingURL=user.controller.js.map
+__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    __metadata("design:type", Number)
+], UserEntity.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], UserEntity.prototype, "login", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], UserEntity.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], UserEntity.prototype, "roles", void 0);
+UserEntity = __decorate([
+    (0, typeorm_1.Entity)({ name: 'users' })
+], UserEntity);
+exports.UserEntity = UserEntity;
+//# sourceMappingURL=user.entity.js.map

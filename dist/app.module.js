@@ -14,6 +14,7 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_module_1 = require("./user/user.module");
 const candidate_module_1 = require("./candidate/candidate.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,6 +33,7 @@ AppModule = __decorate([
             }),
             user_module_1.UserModule,
             candidate_module_1.CandidateModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
