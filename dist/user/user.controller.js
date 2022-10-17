@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const createUser_dto_1 = require("./dto/createUser.dto");
+const refreshPass_dto_1 = require("./dto/refreshPass.dto");
 const updateUser_dto_1 = require("./dto/updateUser.dto");
 const user_service_1 = require("./user.service");
 let UserController = class UserController {
@@ -32,6 +33,9 @@ let UserController = class UserController {
     }
     async deleteUser(id) {
         return await this.userService.deleteUser(id);
+    }
+    async refreshPassword(refreshPassDto, id) {
+        return await this.userService.refreshPassword(refreshPassDto, id);
     }
 };
 __decorate([
@@ -63,6 +67,15 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "deleteUser", null);
+__decorate([
+    (0, common_1.Post)('refreshpass/:id'),
+    (0, common_1.HttpCode)(204),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [refreshPass_dto_1.RefreshPassDto, Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "refreshPassword", null);
 UserController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [user_service_1.UserService])

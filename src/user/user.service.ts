@@ -4,6 +4,7 @@ import { Md5 } from 'ts-md5';
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { LoginUserDto } from './dto/loginUser.dto';
+import { RefreshPassDto } from './dto/refreshPass.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserEntity } from './user.entity';
 
@@ -30,14 +31,10 @@ export class UserService {
   }
 
   async createUser(createUser: CreateUserDto): Promise<UserEntity> {
-    try {
-      const newUser = new UserEntity();
-      Object.assign(newUser, createUser);
-      newUser.password = Md5.hashStr(createUser.password);
-      return this.userRepository.save(newUser);
-    } catch (error) {
-      throw new InternalServerErrorException();
-    }
+    const newUser = new UserEntity();
+    Object.assign(newUser, createUser);
+    newUser.password = Md5.hashStr(createUser.password);
+    return this.userRepository.save(newUser);
   }
 
   async updateUser(
@@ -56,5 +53,15 @@ export class UserService {
 
   async deleteUser(id: number): Promise<DeleteResult> {
     return await this.userRepository.delete(id);
+  }
+
+  async refreshPassword(refreshPassDto: RefreshPassDto, id: number) {
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    user.password = Md5.hashStr(refreshPassDto.newpass);
+    return await this.userRepository.save(user);
   }
 }

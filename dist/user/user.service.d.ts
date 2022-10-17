@@ -1,6 +1,7 @@
 import { DeleteResult, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { LoginUserDto } from './dto/loginUser.dto';
+import { RefreshPassDto } from './dto/refreshPass.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserEntity } from './user.entity';
 export declare class UserService {
@@ -12,4 +13,5 @@ export declare class UserService {
     createUser(createUser: CreateUserDto): Promise<UserEntity>;
     updateUser(updateUserDto: UpdateUserDto, id: number): Promise<UserEntity>;
     deleteUser(id: number): Promise<DeleteResult>;
+    refreshPassword(refreshPassDto: RefreshPassDto, id: number): Promise<UserEntity>;
 }

@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
+import { RefreshPassDto } from './dto/refreshPass.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
@@ -40,5 +41,14 @@ export class UserController {
   @Delete('delete/:id')
   async deleteUser(@Param('id') id: number): Promise<DeleteResult> {
     return await this.userService.deleteUser(id);
+  }
+
+  @Post('refreshpass/:id')
+  @HttpCode(204)
+  async refreshPassword(
+    @Body() refreshPassDto: RefreshPassDto,
+    @Param('id') id: number,
+  ) {
+    return await this.userService.refreshPassword(refreshPassDto, id);
   }
 }

@@ -34,15 +34,10 @@ let UserService = class UserService {
         return await this.userRepository.find();
     }
     async createUser(createUser) {
-        try {
-            const newUser = new user_entity_1.UserEntity();
-            Object.assign(newUser, createUser);
-            newUser.password = ts_md5_1.Md5.hashStr(createUser.password);
-            return this.userRepository.save(newUser);
-        }
-        catch (error) {
-            throw new common_1.InternalServerErrorException();
-        }
+        const newUser = new user_entity_1.UserEntity();
+        Object.assign(newUser, createUser);
+        newUser.password = ts_md5_1.Md5.hashStr(createUser.password);
+        return this.userRepository.save(newUser);
     }
     async updateUser(updateUserDto, id) {
         const user = await this.userRepository.findOne({
@@ -56,6 +51,15 @@ let UserService = class UserService {
     }
     async deleteUser(id) {
         return await this.userRepository.delete(id);
+    }
+    async refreshPassword(refreshPassDto, id) {
+        const user = await this.userRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        user.password = ts_md5_1.Md5.hashStr(refreshPassDto.newpass);
+        return await this.userRepository.save(user);
     }
 };
 UserService = __decorate([
