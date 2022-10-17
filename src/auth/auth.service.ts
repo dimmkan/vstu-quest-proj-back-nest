@@ -30,7 +30,7 @@ export class AuthService {
 
   async login(user: Omit<UserEntity, 'password'>) {
     const payload = {
-      id: user.id,
+      userId: user.id,
       login: user.login,
       roles: user.roles,
       isAuth: true,

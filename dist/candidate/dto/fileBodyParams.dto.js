@@ -9,28 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggerEntity = void 0;
-const typeorm_1 = require("typeorm");
-let LoggerEntity = class LoggerEntity {
-};
+exports.FileBodyParamsDto = void 0;
+const class_validator_1 = require("class-validator");
+class FileBodyParamsDto {
+}
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], LoggerEntity.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], LoggerEntity.prototype, "username", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], LoggerEntity.prototype, "event", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], LoggerEntity.prototype, "date", void 0);
-LoggerEntity = __decorate([
-    (0, typeorm_1.Entity)({ name: 'log' })
-], LoggerEntity);
-exports.LoggerEntity = LoggerEntity;
-//# sourceMappingURL=logger.entity.js.map
+], FileBodyParamsDto.prototype, "username", void 0);
+exports.FileBodyParamsDto = FileBodyParamsDto;
+//# sourceMappingURL=fileBodyParams.dto.js.map

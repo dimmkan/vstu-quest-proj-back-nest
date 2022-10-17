@@ -21,7 +21,6 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async login(req) {
-        console.log(process.env.SECRET_KEY);
         return this.authService.login(req.user);
     }
 };

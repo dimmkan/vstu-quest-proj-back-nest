@@ -9,7 +9,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    console.log(process.env.SECRET_KEY);
     return this.authService.login(req.user);
   }
 }

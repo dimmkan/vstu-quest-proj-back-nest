@@ -52,7 +52,7 @@ let CandidateService = class CandidateService {
                 id,
             },
         });
-        Object.assign(candidate, _.omit(['username'], updatedCandidate));
+        Object.assign(candidate, _.omit(['username', 'id'], updatedCandidate));
         const logObject = {
             username: updatedCandidate.username,
             event: 'Update candidate',
@@ -70,6 +70,135 @@ let CandidateService = class CandidateService {
     }
     async deleteCandidate(id) {
         return await this.candidateRepository.delete(id);
+    }
+    async getQuestById(id) {
+        return await this.candidateRepository.findOne({
+            where: { id },
+            select: [
+                'questionnariesData',
+                'questionnariesName',
+                'questionnariesType',
+                'questionnariesSize',
+            ],
+        });
+    }
+    async addQuest(file, id, bodyParams) {
+        const candidate = await this.candidateRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        const updatedFields = {
+            questionnariesData: file.buffer.toString('base64'),
+            questionnariesName: file.originalname,
+            questionnariesType: file.mimetype,
+            questionnariesSize: file.size,
+        };
+        Object.assign(candidate, updatedFields);
+        const logObject = {
+            username: bodyParams.username,
+            event: 'Upload candidate questionnaries',
+            date: new Date().toLocaleString('ru-RU', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }),
+        };
+        this.loggerService.createLog(logObject);
+        await this.candidateRepository.save(candidate);
+    }
+    async deleteQuest(id, bodyParams) {
+        const candidate = await this.candidateRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        const updatedFields = {
+            questionnariesData: null,
+            questionnariesName: null,
+            questionnariesType: null,
+            questionnariesSize: null,
+        };
+        Object.assign(candidate, updatedFields);
+        const logObject = {
+            username: bodyParams.username,
+            event: 'Delete candidate questionnaries',
+            date: new Date().toLocaleString('ru-RU', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }),
+        };
+        this.loggerService.createLog(logObject);
+        await this.candidateRepository.save(candidate);
+    }
+    async getWorkbookById(id) {
+        return await this.candidateRepository.findOne({
+            where: { id },
+            select: ['workbookData', 'workbookName', 'workbookType', 'workbookSize'],
+        });
+    }
+    async addWorkbook(file, id, bodyParams) {
+        const candidate = await this.candidateRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        const updatedFields = {
+            workbookData: file.buffer.toString('base64'),
+            workbookName: file.originalname,
+            workbookType: file.mimetype,
+            workbookSize: file.size,
+        };
+        Object.assign(candidate, updatedFields);
+        const logObject = {
+            username: bodyParams.username,
+            event: 'Upload candidate workbook',
+            date: new Date().toLocaleString('ru-RU', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }),
+        };
+        this.loggerService.createLog(logObject);
+        await this.candidateRepository.save(candidate);
+    }
+    async deleteWorkbook(id, bodyParams) {
+        const candidate = await this.candidateRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        const updatedFields = {
+            workbookData: null,
+            workbookName: null,
+            workbookType: null,
+            workbookSize: null,
+        };
+        Object.assign(candidate, updatedFields);
+        const logObject = {
+            username: bodyParams.username,
+            event: 'Delete candidate questionnaries',
+            date: new Date().toLocaleString('ru-RU', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }),
+        };
+        this.loggerService.createLog(logObject);
+        await this.candidateRepository.save(candidate);
     }
 };
 CandidateService = __decorate([
