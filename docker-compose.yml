@@ -1,0 +1,14 @@
+version: '3'
+services:
+  api:
+    image: vstu_quest_back:latest
+    container_name: vstu_quest_back
+    environment:
+      DB_HOST: mysqldb
+    restart: always
+    ports:
+      - 3001:3000
+
+networks:
+  default:
+    name: api_network_2
