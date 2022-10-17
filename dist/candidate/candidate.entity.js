@@ -9,96 +9,96 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserEntity = void 0;
+exports.CandidateEntity = void 0;
 const typeorm_1 = require("typeorm");
-let UserEntity = class UserEntity {
+let CandidateEntity = class CandidateEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], UserEntity.prototype, "id", void 0);
+], CandidateEntity.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], UserEntity.prototype, "fio", void 0);
+], CandidateEntity.prototype, "fio", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'date', nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "birthday", void 0);
+], CandidateEntity.prototype, "birthday", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "birthplace", void 0);
+], CandidateEntity.prototype, "birthplace", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "passport", void 0);
+], CandidateEntity.prototype, "passport", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "position", void 0);
+], CandidateEntity.prototype, "position", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "department", void 0);
+], CandidateEntity.prototype, "department", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'date', nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "checkStartDate", void 0);
+], CandidateEntity.prototype, "checkStartDate", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'date', nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "checkEndDate", void 0);
+], CandidateEntity.prototype, "checkEndDate", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "checkResult", void 0);
+], CandidateEntity.prototype, "checkResult", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], UserEntity.prototype, "checkStatus", void 0);
+], CandidateEntity.prototype, "checkStatus", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "checkComment", void 0);
+], CandidateEntity.prototype, "checkComment", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", String)
-], UserEntity.prototype, "questionnariesData", void 0);
+], CandidateEntity.prototype, "questionnariesData", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "questionnariesName", void 0);
+], CandidateEntity.prototype, "questionnariesName", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", String)
-], UserEntity.prototype, "questionnariesType", void 0);
+], CandidateEntity.prototype, "questionnariesType", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", Number)
-], UserEntity.prototype, "questionnariesSize", void 0);
+], CandidateEntity.prototype, "questionnariesSize", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", String)
-], UserEntity.prototype, "workbookData", void 0);
+], CandidateEntity.prototype, "workbookData", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "workbookName", void 0);
+], CandidateEntity.prototype, "workbookName", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", String)
-], UserEntity.prototype, "workbookType", void 0);
+], CandidateEntity.prototype, "workbookType", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true, select: false }),
     __metadata("design:type", Number)
-], UserEntity.prototype, "workbookSize", void 0);
+], CandidateEntity.prototype, "workbookSize", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], UserEntity.prototype, "endResult", void 0);
-UserEntity = __decorate([
+], CandidateEntity.prototype, "endResult", void 0);
+CandidateEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'candidates' })
-], UserEntity);
-exports.UserEntity = UserEntity;
+], CandidateEntity);
+exports.CandidateEntity = CandidateEntity;
 //# sourceMappingURL=candidate.entity.js.map

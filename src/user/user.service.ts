@@ -10,8 +10,6 @@ import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {
-  private readonly users: UserEntity[];
-
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,

@@ -1,37 +1,74 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
+import { CandidateEntity } from './candidate.entity';
 import { CandidateService } from './candidate.service';
+import { CreatedCandidateDto } from './dto/createdCandidate.dto';
+import { UpdatedCandidateDto } from './dto/updatedCandidate.dto';
 
 @Controller('candidates')
 export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
   @Get()
-  getCandidates() {}
+  async getCandidates(): Promise<CandidateEntity[]> {
+    return await this.candidateService.getAllCandidates();
+  }
 
   @Post()
-  addCandidate() {}
+  @HttpCode(201)
+  async addCandidate(@Body() createdCandidate: CreatedCandidateDto) {
+    return await this.candidateService.createCandidate(createdCandidate);
+  }
 
-  @Put()
-  updateCandidate() {}
+  @Put('update/:id')
+  async updateCandidate(
+    @Body() updatedCandidate: UpdatedCandidateDto,
+    @Param('id') id: number,
+  ): Promise<CandidateEntity> {
+    return await this.candidateService.updateCandidate(updatedCandidate, id);
+  }
 
-  @Delete()
-  deleteCandidate() {}
+  @Delete('delete/:id')
+  async deleteCandidate(@Param('id') id: number): Promise<DeleteResult> {
+    return await this.candidateService.deleteCandidate(id);
+  }
 
   @Get()
-  downloadQuest() {}
+  downloadQuest() {
+    return {};
+  }
 
   @Post()
-  addQuest() {}
+  addQuest() {
+    return {};
+  }
 
   @Delete()
-  deleteQuest() {}
+  deleteQuest() {
+    return {};
+  }
 
   @Get()
-  downloadWorkbook() {}
+  downloadWorkbook() {
+    return {};
+  }
 
   @Post()
-  addWorkbook() {}
+  addWorkbook() {
+    return {};
+  }
 
   @Delete()
-  deleteWorkbook() {}
+  deleteWorkbook() {
+    return {};
+  }
 }

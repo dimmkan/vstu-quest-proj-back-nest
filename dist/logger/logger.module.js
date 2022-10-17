@@ -6,21 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CandidateModule = void 0;
+exports.LoggerModule = void 0;
 const common_1 = require("@nestjs/common");
-const candidate_service_1 = require("./candidate.service");
-const candidate_controller_1 = require("./candidate.controller");
-const logger_module_1 = require("../logger/logger.module");
-const candidate_entity_1 = require("./candidate.entity");
 const typeorm_1 = require("@nestjs/typeorm");
-let CandidateModule = class CandidateModule {
+const logger_entity_1 = require("./logger.entity");
+const logger_service_1 = require("./logger.service");
+let LoggerModule = class LoggerModule {
 };
-CandidateModule = __decorate([
+LoggerModule = __decorate([
     (0, common_1.Module)({
-        imports: [logger_module_1.LoggerModule, typeorm_1.TypeOrmModule.forFeature([candidate_entity_1.CandidateEntity])],
-        providers: [candidate_service_1.CandidateService],
-        controllers: [candidate_controller_1.CandidateController],
+        imports: [typeorm_1.TypeOrmModule.forFeature([logger_entity_1.LoggerEntity])],
+        providers: [logger_service_1.LoggerService],
+        exports: [logger_service_1.LoggerService],
     })
-], CandidateModule);
-exports.CandidateModule = CandidateModule;
-//# sourceMappingURL=candidate.module.js.map
+], LoggerModule);
+exports.LoggerModule = LoggerModule;
+//# sourceMappingURL=logger.module.js.map

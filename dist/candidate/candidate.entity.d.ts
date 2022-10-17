@@ -1,4 +1,4 @@
-export declare class UserEntity {
+export declare class CandidateEntity {
     id: number;
     fio: string;
     birthday: string;

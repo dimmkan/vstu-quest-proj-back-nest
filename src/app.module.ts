@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { CandidateModule } from './candidate/candidate.module';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { FilesModule } from './files/files.module';
     CandidateModule,
     AuthModule,
     FilesModule,
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
