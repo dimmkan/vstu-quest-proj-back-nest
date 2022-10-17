@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const ts_md5_1 = require("ts-md5");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 let UserService = class UserService {
@@ -28,6 +29,33 @@ let UserService = class UserService {
                 password: user.password,
             },
         });
+    }
+    async getAllUsers() {
+        return await this.userRepository.find();
+    }
+    async createUser(createUser) {
+        try {
+            const newUser = new user_entity_1.UserEntity();
+            Object.assign(newUser, createUser);
+            newUser.password = ts_md5_1.Md5.hashStr(createUser.password);
+            return this.userRepository.save(newUser);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException();
+        }
+    }
+    async updateUser(updateUserDto, id) {
+        const user = await this.userRepository.findOne({
+            where: {
+                id,
+            },
+        });
+        Object.assign(user, updateUserDto);
+        user.password = ts_md5_1.Md5.hashStr(updateUserDto.password);
+        return await this.userRepository.save(user);
+    }
+    async deleteUser(id) {
+        return await this.userRepository.delete(id);
     }
 };
 UserService = __decorate([
